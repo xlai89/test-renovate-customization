@@ -339,9 +339,9 @@ vars:
           version_cmd: " version --client-only"
           target_version: v1.13.2
           #md5_checksum: "30ab57f9520ae2318ab28eefbc81728c"
-        terraform: # renovate: datasource=custom.hashicorp versioning=hashicorp
+        terraform: # renovate: datasource=custom.hashicorp
           bin_name: "terraform"
-          bin_version: "1.8.3"
+          bin_version: "1.8.0"
           check_bin_version_before_installing: true
           source_url: "https://releases.hashicorp.com/terraform/1.8.0/terraform_1.8.3_linux_amd64.zip"
           bin_to_copy: "terraform"
