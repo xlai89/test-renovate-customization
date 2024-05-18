@@ -19,9 +19,10 @@
       "fileMatch": ["\\.yaml$"],
       "datasourceTemplate": "custom.hashicorp",
       "matchStrings": [
-        "#\\s*renovate:?\\s*(versioning=(?<versioning>.*?))?\\s*\\w*:\\s*[\"']?(?<depName>[^\"']*)[\"']?\\s*\\w*:\\s*[\"']?(?<currentValue>[^\"']*)[\"']?\\s"
+        "#\\s*renovate:?\\s*(datasource=(?<datasource>.*?))?\\s*( versioning=(?<versioning>.*?))?\\s*\\w*:\\s*[\"']?(?<depName>[^\"']*)[\"']?\\s*\\w*:\\s*[\"']?(?<currentValue>[^\"']*)[\"']?\\s"
       ],
-      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
+      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}",
+      "autoReplaceStringTemplate": "image: {{{depName}}}:{{{newValue}}}"
     }
   ],
   "customDatasources": {
