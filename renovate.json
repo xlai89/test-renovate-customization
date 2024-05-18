@@ -6,7 +6,7 @@
   ],
   "packageRules": [
     {
-      "description": "Automatically merge minor and patch-level updates",
+      "description": "HashiCorp",
       "matchUpdateTypes": ["minor", "patch", "digest"],
       "automerge": false,
       "automergeType": "pr",
@@ -19,10 +19,9 @@
       "fileMatch": ["\\.yaml$"],
       "datasourceTemplate": "custom.hashicorp",
       "matchStrings": [
-        "#\\s*renovate:?\\s*(datasource=(?<datasource>.*?))?\\s*( versioning=(?<versioning>.*?))?\\s*\\w*:\\s*[\"']?(?<depName>[^\"']*)[\"']?\\s*\\w*:\\s*[\"']?(?<currentValue>[^\"']*)[\"']?\\s"
+        "#\\s*renovate:?\\s*(datasource=(?<datasource>.*?))?\\s*(versioning=(?<versioning>.*?))?\\s*\\w*:\\s*[\"']?(?<depName>[^\"']*)[\"']?\\s*\\w*:\\s*[\"']?(?<currentValue>[^\"']*)[\"']?"
       ],
-      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}",
-      "autoReplaceStringTemplate": "image: {{{depName}}}:{{{newValue}}}"
+      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
     }
   ],
   "customDatasources": {
