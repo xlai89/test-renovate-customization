@@ -328,7 +328,7 @@ vars:
     file: |
       ---
       bin:
-        velero: # renovate: datasource=custom.github-releases packageName=vmware-tanzu/velero
+        velero: # renovate: datasource=github-releases depName=vmware-tanzu/velero
           bin_name: "velero"
           bin_version: "1.13.1"
           check_bin_version_before_installing: true
@@ -350,7 +350,7 @@ vars:
           version_cmd: " --version"
           target_version: v1.8.3
           #md5_checksum: "2c6638e53cf5474c4d1363c17e8653ef"
-        helm: # renovate: datasource=custom.github-releases packageName=helm/helm
+        helm: # renovate: datasource=github-releases depName=helm/helm
           bin_name: "helm"
           bin_version: "3.14.4"
           check_bin_version_before_installing: true
@@ -361,7 +361,7 @@ vars:
           version_cmd: " version"
           target_version: v3.14.4
           #md5_checksum: "8dd2ecdbb70ef4e3a55083e8d5ebf352"
-        kubectl: # renovate: datasource=custom.kubectl-cli
+        kubectl: # renovate: datasource=github-tags depName=kubernetes/kubernetes
           bin_name: "kubectl"
           bin_version: "1.30.0"
           check_bin_version_before_installing: true
@@ -383,7 +383,7 @@ vars:
           version_cmd: " --version"
           target_version: v1.10.0
           #md5_checksum: "374f22185f1f8cb25bc53187a2154ef0"
-        k9s: # renovate: datasource=custom.github-releases packageName=derailed/k9s
+        k9s: # renovate: datasource=github-releases depName=derailed/k9s
           bin_name: "k9s"
           bin_version: "0.32.0"
           check_bin_version_before_installing: true
