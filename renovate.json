@@ -18,11 +18,22 @@
       "customType": "regex",
       "fileMatch": ["\\.yaml$"],
       "matchStrings": [
-        "#\\s*renovate:?\\s*(datasource=(?<datasource>.*?))?\\s*(depName=(?<depName>.*?))?\\s*(versioning=(?<versioning>.*?))?\\s*bin_name:\\s*[\"']?(?<binName>(\\w|\\.|-)*)[\"']?\\s*bin_version:\\s*[\"']?(?<currentValue>(\\w|\\.|-)*)[\"']?"
+        "#\\s*renovate:?\\s*(datasource=(?<datasource>.*?))?\\s*(depName=(?<depName>.*?))?\\s*(versioning=(?<versioning>.*?))?\\s*bin_name:\\s*[\"']?(?<binName>[\\w\\.-]*)[\"']?\\s*bin_version:\\s*[\"']?(?<currentValue>[\\w\\.-]*)[\"']?"
       ],
       "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}",
       "extractVersionTemplate": "^v?(?<version>.*)$",
       "depNameTemplate": "{{#if depName}}{{{depName}}}{{else}}{{{binName}}}{{/if}}"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": ["\\.yaml$"],
+      "datasourceTemplate": "github-releases",
+      "matchStrings": [
+        "bin_version:\\s*[\"']?(?<currentValue>[\\w\\.-]*)[\"']?(\\s*.*){0,3}\\s*source_url:\\s*[\"']?https:\/\/github.com\/(?<depName>[^\/]+\/[^\/]+)\/releases\/download",
+        "-\\ssrc:\\s[\"']?https:\/\/github.com\/(?<depName>[^\/]+\/[^\/]+)\\.git[\"']?(\\s*.*)scm:\\sgit\\s*version:\\s[\"']?(?<currentValue>[\\w\\.-]*)[\"']?"
+      ],
+      "versioningTemplate": "loose",
+      "extractVersionTemplate": "^v?(?<version>.*)$"
     },
     {
       "customType": "regex",
@@ -32,7 +43,7 @@
         "golang_version:\\s*[\"']?(?<currentValue>[^\\n\"']*)[\"']?"
       ],
       "packageNameTemplate": "golang",
-      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
+      "versioningTemplate": "semver"
     }
   ],
   "customDatasources": {
@@ -40,12 +51,6 @@
       "defaultRegistryUrlTemplate": "https://api.releases.hashicorp.com/v1/releases/{{packageName}}?license_class=oss",
       "transformTemplates": [
         "{ \"releases\": $map($, function($v) { { \"version\": $v.version, \"releaseTimestamp\": $v.timestamp_created, \"changelogUrl\": $v.url_changelog, \"sourceUrl\": $v.url_source_repository } }), \"homepage\": $[0].url_project_website, \"sourceUrl\": $[0].url_source_repository }"
-      ]
-    },
-    "kubectl-cli": {
-      "defaultRegistryUrlTemplate": "https://api.github.com/repos/kubernetes/kubernetes/tags",
-      "transformTemplates": [
-        "{ \"releases\": $map($, function($v) { { \"version\": $v.name, \"releaseTimestamp\": \"\", \"changelogUrl\": $v.commit.url, \"sourceUrl\": $v.commit.url } }), \"homepage\": \"\", \"sourceUrl\": \"\" }"
       ]
     }
   }

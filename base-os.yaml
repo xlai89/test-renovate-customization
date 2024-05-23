@@ -9,7 +9,7 @@ requirements: |
       version: 2024.04.19
     - src: https://github.com/stuttgart-things/create-os-user.git
       scm: git
-      version: 2024.05.03
+      version: 2024.04.25
     - src: https://github.com/stuttgart-things/install-configure-docker.git
       scm: git
       version: 2024.04.30
@@ -114,14 +114,14 @@ playbooks:
           bin:
             nerdctl:
               bin_name: "nerdctl"
-              bin_version: "1.7.6"
+              bin_version: "1.7.5"
               check_bin_version_before_installing: true
-              source_url: "https://github.com/containerd/nerdctl/releases/download/v1.7.6/nerdctl-full-1.7.6-linux-amd64.tar.gz"
+              source_url: "https://github.com/containerd/nerdctl/releases/download/v1.7.5/nerdctl-full-1.7.5-linux-amd64.tar.gz"
               bin_to_copy: "."
               bin_dir: "/usr/local"
               to_remove: "*"
               version_cmd: " version"
-              target_version: v1.7.6
+              target_version: v1.7.5
               md5_checksum: "044b60cec5341a3cde7a091cc2f12aa7"
 
           systemd_services:
@@ -328,7 +328,7 @@ vars:
     file: |
       ---
       bin:
-        velero: # renovate: datasource=github-releases depName=vmware-tanzu/velero
+        velero:
           bin_name: "velero"
           bin_version: "1.13.1"
           check_bin_version_before_installing: true
@@ -383,7 +383,7 @@ vars:
           version_cmd: " --version"
           target_version: v1.10.0
           #md5_checksum: "374f22185f1f8cb25bc53187a2154ef0"
-        k9s: # renovate: datasource=github-releases depName=derailed/k9s
+        k9s:
           bin_name: "k9s"
           bin_version: "0.32.0"
           check_bin_version_before_installing: true
