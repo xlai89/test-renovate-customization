@@ -17,11 +17,11 @@
     {
       "customType": "regex",
       "fileMatch": ["\\.yaml$"],
-      "datasourceTemplate": "custom.hashicorp",
       "matchStrings": [
-        "#\\s*renovate:?\\s*(datasource=(?<datasource>.*?))?\\s*(versioning=(?<versioning>.*?))?\\s*\\w*:\\s*[\"']?(?<depName>[^\"']*)[\"']?\\s*\\w*:\\s*[\"']?(?<currentValue>[^\"']*)[\"']?"
+        "#\\s*renovate:?\\s*(datasource=(?<datasource>.*?))?\\s*(versioning=(?<versioning>.*?))?\\s*(packageName=(?<packageName>.*?))?\\s*\\w*:\\s*[\"']?(?<depName>[^\"']*)[\"']?\\s*\\w*:\\s*[\"']?(?<currentValue>[^\"']*)[\"']?"
       ],
-      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
+      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}",
+      "extractVersionTemplate": "^v?(?<version>.*)$"
     }
   ],
   "customDatasources": {
@@ -29,6 +29,18 @@
       "defaultRegistryUrlTemplate": "https://api.releases.hashicorp.com/v1/releases/{{packageName}}?license_class=oss",
       "transformTemplates": [
         "{ \"releases\": $map($, function($v) { { \"version\": $v.version, \"releaseTimestamp\": $v.timestamp_created, \"changelogUrl\": $v.url_changelog, \"sourceUrl\": $v.url_source_repository } }), \"homepage\": $[0].url_project_website, \"sourceUrl\": $[0].url_source_repository }"
+      ]
+    },
+    "github-releases": {
+      "defaultRegistryUrlTemplate": "https://api.github.com/repos/{{packageName}}/releases",
+      "transformTemplates": [
+        "{ \"releases\": $map($, function($v) { { \"version\": $v.tag_name, \"releaseTimestamp\": $v.published_at, \"changelogUrl\": $v.html_url, \"sourceUrl\": $v.html_url } }), \"homepage\": $[0].html_url, \"sourceUrl\": $[0].html_url }"
+      ]
+    },
+    "kubectl-cli": {
+      "defaultRegistryUrlTemplate": "https://api.github.com/repos/kubernetes/kubernetes/tags",
+      "transformTemplates": [
+        "{ \"releases\": $map($, function($v) { { \"version\": $v.name, \"releaseTimestamp\": \"\", \"changelogUrl\": $v.commit.url, \"sourceUrl\": $v.commit.url } }), \"homepage\": \"\", \"sourceUrl\": \"\" }"
       ]
     }
   }
