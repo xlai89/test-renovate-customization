@@ -20,7 +20,8 @@
       "matchStrings": [
         "#\\s*renovate:?\\s*(datasource=(?<datasource>.*?))?\\s*(versioning=(?<versioning>.*?))?\\s*(packageName=(?<packageName>.*?))?\\s*\\w*:\\s*[\"']?(?<depName>[^\"']*)[\"']?\\s*\\w*:\\s*[\"']?(?<currentValue>[^\"']*)[\"']?"
       ],
-      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
+      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}",
+      "extractVersionTemplate": "^v?(?<version>.*)$"
     }
   ],
   "customDatasources": {
